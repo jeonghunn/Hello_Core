@@ -8,7 +8,8 @@ function getCoreVersion(){
 
 function isDevelopmentMode()
 {
-    return false;
+  global $SERVICE_MODE;
+    return $SERVICE_MODE;
 }
 
 
