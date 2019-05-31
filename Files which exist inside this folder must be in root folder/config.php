@@ -10,11 +10,8 @@ $MAIN_URL = "http://s9uare.com/";
 $MAIN_API_URL = "http://s9uare.com/api.php";
 $CLIENT_SERVER_IP_ADDRESS = "52.78.110.116";
 
-//DATABASE
-$DB_NAME = "square";
-$DB_SERVER_PATH = "localhost";
-$DB_USERNAME = "root";
-$DB_PASSWORD = "root";
+//Database
+require_once 'db_config.php';
 
 //Import Modules
 $IMPORT_MODULE = array('settings', 'main', 'account', 'board', 'page', 'notification', 'attach', 'square');
