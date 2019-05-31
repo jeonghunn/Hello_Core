@@ -473,13 +473,15 @@ function getSqlInsertQuery($table_name, $array){
     $values = " ) VALUES ( ";
 
     foreach ($array as $key => $value){
-        $columns = $columns == '' ? ' `'.$key.'` ' : ', '.$columns.' `'.$key.'` ';
+        $columns = $columns == '' ? ' `'.$key.'` ' : $columns.', '.' `'.$key.'` ';
         $values = $values == " ) VALUES ( " ? $values." '".$value."' " : $values.", '".$value."' ";
     }
 
     $result = $result.$columns.$values.')';
     return $result;
 }
+
+
 
 
 
