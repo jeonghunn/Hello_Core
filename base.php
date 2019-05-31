@@ -453,6 +453,11 @@ function ThreadAct($name, $array){
 
 
 function printMessageByBool($bool, $msg){
+    if($bool != true && $bool != false) {
+        $msg = $bool;
+        $bool =false;
+
+    }
     if($bool){
         //Success
         SuccessMessage($msg);
