@@ -453,7 +453,7 @@ function ThreadAct($name, $array){
 
 
 function printMessageByBool($bool, $msg){
-    if($bool != true && $bool != false) {
+    if(is_string($bool)) {
         $msg = $bool;
         $bool =false;
 
