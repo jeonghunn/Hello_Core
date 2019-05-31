@@ -49,6 +49,8 @@ require_once 'core/lib/Thumbnail.class.php';
 //Import Modules
 foreach ($IMPORT_MODULE as $a) {
     require_once 'modules/' . $a . '/' . $a . '.loader.php'; // loader
+}
+foreach ($IMPORT_MODULE as $a) {
     require_once 'modules/' . $a . '/' . $a . '.api.php'; // api
 }
 
