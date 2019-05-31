@@ -4,7 +4,6 @@ define('642979',   TRUE);
 require_once 'config.php';
  require_once 'core/base.php';
  require_once 'core/db.php';
- use core\SqlQueryBuilder\Builder\GenericBuilder;
 
 
 //debugMode();
