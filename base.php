@@ -452,6 +452,10 @@ function ThreadAct($name, $array){
 }
 
 
+function makeSQLInsertQuery($array){
+
+
+}
 
       
 ?>
