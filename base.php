@@ -452,9 +452,14 @@ function ThreadAct($name, $array){
 }
 
 
-function makeSQLInsertQuery($array){
-
-
+function printMessageByBool($bool, $msg){
+    if($bool){
+        //Success
+        SuccessMessage($msg);
+    }else{
+        //Failed
+        ErrorMessage($msg);
+    }
 }
 
       
