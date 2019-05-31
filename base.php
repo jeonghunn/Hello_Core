@@ -467,5 +467,19 @@ function printMessageByBool($bool, $msg){
     }
 }
 
+function getSqlInsertQuery($table_name, $array){
+    $result = "INSERT INTO `".$table_name."` (";
+    $columns = "";
+    $values = " ) VALUES ( ";
+
+    foreach ($array as $key => $value){
+$columns = $columns == '' ? ' `'.$key.'` ' : ', '.$columns.' `'.$key.'` ';
+$values = $values == " ) VALUES ( " ? "'".$value."' " : ", '".$value."' ";
+    }
+
+    $result = $result.$columns.$values.')';
+    return $result;
+}
+
       
 ?>
