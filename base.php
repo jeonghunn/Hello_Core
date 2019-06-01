@@ -118,6 +118,9 @@ function getTimeStamp(){
     return strtotime(date('Y-m-d H:i:s'));
 }
 
+function getMTimestamp(){
+    return round(microtime(true) * 1000);
+}
 
 
 function getHttpLanguage(){
@@ -480,9 +483,6 @@ function getSqlInsertQuery($table_name, $array){
     $result = $result.$columns.$values.')';
     return $result;
 }
-
-
-
 
 
 
