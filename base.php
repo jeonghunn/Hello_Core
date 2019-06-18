@@ -484,6 +484,25 @@ function getSqlInsertQuery($table_name, $array){
     return $result;
 }
 
+function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
+    $result = "SELECT * FROM `".$table_name."` WHERE ";
+
+    $columns = "";
+    $values = " LIKE ";
+
+
+    foreach ($array as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $values = $values." '".$value."' ";
+        $result = $result.$columns.$values;
+    }
+
+   if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
+    $result = $result." ORDER BY ".$orderby." ".$align;
+
+    return $result;
+
+}
 
 
 ?>
