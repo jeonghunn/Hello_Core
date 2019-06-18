@@ -532,6 +532,24 @@ function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
 
 }
 
+function getSqlDeleteQuery($table_name, $array, $statusDelete){
+    if($statusDelete) return getSqlUpdateQuery($table_name, array('status' => 'deleted'), $array, true);
+
+    $result = "DELETE * FROM `".$table_name."` WHERE ";
+
+    $columns = "";
+    $deter = " LIKE ";
+
+
+    foreach ($array as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $values = " '".$value."' ";
+        $result = $result.$columns.$deter.$values;
+    }
+
+    return $result;
+
+}
 
 
 
