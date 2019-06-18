@@ -488,21 +488,51 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
     $result = "SELECT * FROM `".$table_name."` WHERE ";
 
     $columns = "";
-    $values = " LIKE ";
+    $deter = " LIKE ";
 
 
     foreach ($array as $key => $value){
         $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
-        $values = $values." '".$value."' ";
-        $result = $result.$columns.$values;
+        $values = " '".$value."' ";
+        $result = $result.$columns.$deter.$values;
     }
 
-   if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
+    if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
     $result = $result." ORDER BY ".$orderby." ".$align;
 
     return $result;
 
 }
+function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
+    $result = "UPDATE `".$table_name."` SET ";
+
+    $columns = "";
+    $deter = " LIKE ";
+
+    $scolumns = "";
+
+    foreach ($array as $key => $value){
+        $scolumns = $scolumns == '' ? ' `'.$key.'` ' : ', '.' `'.$key.'` ';
+        $values = " '".$value."' ";
+        $result = $result.$scolumns."=".$values;
+    }
+
+    $result=$result." WHERE ";
+
+    foreach ($array as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $values = " '".$value."' ";
+        $result = $result.$columns.$deter.$values;
+    }
+
+    if($status) $result = $result.", `status` NOT LIKE 'deleted'";
+
+
+    return $result;
+
+}
+
+
 
 
 ?>
