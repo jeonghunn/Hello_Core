@@ -572,6 +572,7 @@ function arrayKeyToInfoArray($array){
     foreach ($array as $key => $value){
         array_push($key);
     }
+    return $newArray;
 }
 
 ?>
