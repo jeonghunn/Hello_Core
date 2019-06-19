@@ -570,7 +570,7 @@ function makeModelFromRequest($array, $replace, $keyReplace){
 function arrayKeyToInfoArray($array){
     $newArray = array();
     foreach ($array as $key => $value){
-        array_push($key);
+        array_push($newArray,$key);
     }
     return $newArray;
 }
