@@ -567,6 +567,11 @@ function makeModelFromRequest($array, $replace, $keyReplace){
     return $array;
 }
 
-
+function arrayKeyToInfoArray($array){
+    $newArray = array();
+    foreach ($array as $key => $value){
+        array_push($key);
+    }
+}
 
 ?>
