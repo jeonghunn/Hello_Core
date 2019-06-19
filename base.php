@@ -521,7 +521,7 @@ function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
 
     $result=$result." WHERE ";
 
-    foreach ($array as $key => $value){
+    foreach ($whereArray as $key => $value){
         $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
         $values = " '".$value."' ";
         $result = $result.$columns.$deter.$values;
