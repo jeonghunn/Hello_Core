@@ -537,7 +537,7 @@ function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
 function getSqlDeleteQuery($table_name, $array, $statusDelete){
     if($statusDelete) return getSqlUpdateQuery($table_name, array('status' => 'deleted'), $array, true);
 
-    $result = "DELETE * FROM `".$table_name."` WHERE ";
+    $result = "DELETE FROM `".$table_name."` WHERE ";
 
     $columns = "";
     $deter = " LIKE ";
@@ -548,6 +548,7 @@ function getSqlDeleteQuery($table_name, $array, $statusDelete){
         $values = " '".$value."' ";
         $result = $result.$columns.$deter.$values;
     }
+
 
     return $result;
 
@@ -568,6 +569,7 @@ function makeModelFromRequest($array, $replace, $keyReplace){
 }
 
 function arrayKeyToInfoArray($array){
+
     $newArray = array();
     foreach ($array as $key => $value){
         array_push($newArray,$key);
