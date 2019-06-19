@@ -499,7 +499,8 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
     }
 
     if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
-    $result = $result." ORDER BY ".$orderby." ".$align;
+    if($orderby != null)$result = $result." ORDER BY ".$orderby." ".$align;
+
 
     return $result;
 
