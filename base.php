@@ -485,7 +485,8 @@ function getSqlInsertQuery($table_name, $array){
 }
 
 function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
-    $result = "SELECT * FROM `".$table_name."` WHERE ";
+    $result = "SELECT * FROM `".$table_name."` ";
+    if($array != null) $result=$result." WHERE ";
 
     $columns = "";
     $deter = " LIKE ";
@@ -549,6 +550,20 @@ function getSqlDeleteQuery($table_name, $array, $statusDelete){
 
     return $result;
 
+}
+
+
+function makeModelFromRequest($array, $replace, $keyReplace){
+
+    foreach ($array as $key => $value){
+        $array[$key] = REQUEST($key);
+        if($replace != null && $replace[$key] != null) $array[$key] = $replace[$key];
+        if($keyReplace != null && $keyReplace[$key] != null) {
+            $array[$keyReplace[$key]] = $array[$key];
+            unset($array[$key]);
+        }
+    }
+    return $array;
 }
 
 
