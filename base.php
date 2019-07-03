@@ -160,8 +160,8 @@ function printResult($result_bool, $action, $msg, $code, $data){
  * @return Array $return : Result Array.
  */
 function makeResultMessage($result_bool, $action, $msg, $code, $data){
-    if($result_bool != true && $result_bool != false){
-        if($msg == null) $msg == $result_bool;
+    if(is_bool($result_bool) === false){
+        if($msg == null) $msg = $result_bool;
         $result_bool = false;
     }
     return array('action' => $action, 'result_bool' => $result_bool, 'result_msg' => $msg, 'code' => $code, 'data' => $data);
