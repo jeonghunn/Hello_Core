@@ -142,8 +142,30 @@ function SuccessMessage($msg) {
 
 }
 
+function printResult($result_bool, $action, $msg, $code, $data){
+    if($code == null) $code = 200;
+ echo EncodeJson(makeResultMessage($result_bool,$action,$msg, $code, $data));
+}
 
-
+/**
+ * makeResultMessage
+ * make result array.
+ *
+ * @param Boolean $result_bool : success = true, fail = false. if this parameter not bool, it means false.
+ * @param String $action : action name. ex) delete_doc
+ * @param String $msg : Result message.
+ * @param String $msg : Result message.
+ * @param Integer $code : http code.
+ * @param String $data : main data.
+ * @return Array $return : Result Array.
+ */
+function makeResultMessage($result_bool, $action, $msg, $code, $data){
+    if($result_bool != true && $result_bool != false){
+        if($msg == null) $msg == $result_bool;
+        $result_bool = false;
+    }
+    return array('action' => $action, 'result_bool' => $result_bool, 'result_msg' => $msg, 'code' => $code, 'data' => $data);
+}
 
 function ErrorPrint($msg, $des) {
     MessagePrint("error", $msg, $des);
@@ -554,8 +576,17 @@ function getSqlDeleteQuery($table_name, $array, $statusDelete){
 
 }
 
-
+/**
+ * makeModelFromRequest
+ * it puts values to array which comes from http request.
+ *
+ * @param Array $array : This array keys used to getting http request.
+ * @param Array $replce : Replace value by key.
+ * @param Array $keyReplace : Replace key name.
+ * @return Array $return : Array that includes request values.
+ */
 function makeModelFromRequest($array, $replace, $keyReplace){
+
 
     foreach ($array as $key => $value){
         $array[$key] = REQUEST($key);
@@ -565,6 +596,7 @@ function makeModelFromRequest($array, $replace, $keyReplace){
             unset($array[$key]);
         }
     }
+    $array['status'] = 0; //Prevent status being change.
     return $array;
 }
 
