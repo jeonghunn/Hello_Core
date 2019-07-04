@@ -151,7 +151,7 @@ function printResult($result_bool, $action, $msg, $code, $data){
  * makeResultMessage
  * make result array.
  *
- * @param Boolean $result_bool : success = true, fail = false. if this parameter not bool, it means false.
+ * @param Boolean $result_bool : success = true, fail = false. if this parameter is not bool, it means false.
  * @param String $action : action name. ex) delete_doc
  * @param String $msg : Result message.
  * @param String $msg : Result message.
