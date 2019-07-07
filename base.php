@@ -638,4 +638,8 @@ function getIdentity(){
     return $user_identity;
 }
 
+function sqlBool($mysqli_result){
+    return $mysqli_result == false ? false : true;
+}
+
 ?>
