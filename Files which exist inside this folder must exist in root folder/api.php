@@ -20,6 +20,8 @@ require_once 'core/auth.php';
 
 $user_srl = AuthCheck($page_auth, 'user_srl', false);
 (int)$user_permission_status = 3; // User Permission Default
+$user_identity = array();
+
 if ($user_srl == null) $user_srl = 0;
 
 require_once 'core/logger.php';
@@ -28,8 +30,9 @@ require_once 'core/permission.php';
 
 // Client log
 
-//Check IP
-PermissionCheckAct($user_srl);
+//Check valid identity
+defineIdentity($user_srl);
+checkValidIdentity($user_srl);
 $ipmanage = IPManageAct(getIPAddr(), getNowUrl(), getTimeStamp());
 
 

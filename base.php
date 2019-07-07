@@ -609,4 +609,9 @@ function arrayKeyToInfoArray($array){
     return $newArray;
 }
 
+function getIdentity(){
+    global $user_identity;
+    return $user_identity;
+}
+
 ?>

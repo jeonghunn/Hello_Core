@@ -51,17 +51,19 @@ function getIPManageInfo($REMOTE_ADDR)
      DBQuery("UPDATE `ip_manage` SET  `point` = '$ip_point' WHERE `ip_addr` = '".getIPAddr()."'");
    }
 
-   function PermissionCheckAct($user_srl){
-       global $user_permission_status;
-   	 //  Permission Check
- $user_permission = mysqli_fetch_array(DBQuery("SELECT * FROM  `pages` WHERE  `srl` LIKE '$user_srl'"));
-  (int) $user_permission_status = $user_permission['permission']; //set user permission
+   function checkValidIdentity($user_srl){
+    global $user_identity;
 
-  if($user_permission['status'] == 5) ErrorMessage("unknown_error");
-        $permission_allow = 3;
-        if($user_permission['permission'] > $permission_allow) ErrorMessage("permission_error");
+          if($user_identity['status'] == 5 || $user_identity['status'] == "deleted") ErrorMessage("unknown_error");
+        if($user_identity['permission'] > 3) ErrorMessage("permission_error");
    }
 
+
+   function defineIdentity($user_srl){
+    global $user_identity;
+    $user_identity = mysqli_fetch_array(DBQuery(getSqlSelectQuery('pages', array('srl' => $user_srl),null, "ASC", false)));
+
+   }
 //function APICheckActRand(){
 //  if(lottoNum(30)) APICheckAct();
 //
