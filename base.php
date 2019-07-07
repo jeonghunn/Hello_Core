@@ -161,7 +161,7 @@ function printResult($result_bool, $action, $msg, $code, $data){
  */
 function makeResultMessage($result_bool, $action, $msg, $code, $data){
     //if result contains error string
-    if(strpos($result_bool, 'error') !== false){
+    if(is_string($result_bool) && strpos($result_bool, 'error') !== false){
         if($msg == null) $msg = $result_bool;
         $result_bool = false;
     }else if(is_bool($result_bool) == false){
