@@ -527,6 +527,28 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
     return $result;
 
 }
+
+function getSqlAdvSelectQuery($table_name, $array, $orderby , $align, $status){
+    $result = "SELECT * FROM `".$table_name."` ";
+    if($array != null) $result=$result." WHERE ";
+
+    $columns = "";
+
+
+    foreach ($array as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $values = " '".$value[1]."' ";
+        $result = $result.$columns.$value[0].$values;
+    }
+
+    if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
+    if($orderby != null)$result = $result." ORDER BY ".$orderby." ".$align;
+
+
+    return $result;
+
+}
+
 function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
     $result = "UPDATE `".$table_name."` SET ";
 
@@ -575,6 +597,8 @@ function getSqlDeleteQuery($table_name, $array, $statusDelete){
     return $result;
 
 }
+
+
 
 /**
  * makeModelFromRequest
