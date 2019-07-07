@@ -165,7 +165,7 @@ function makeResultMessage($result_bool, $action, $msg, $code, $data){
         if($msg == null) $msg = $result_bool;
         $result_bool = false;
     }else if(is_bool($result_bool) == false){
-        if($msg == null) $msg = $result_bool;
+        if($msg == null && is_string($result_bool)) $msg = $result_bool;
         $result_bool = true;
     }
     return array('action' => $action, 'result_bool' => $result_bool, 'result_msg' => $msg, 'code' => $code, 'data' => $data);
