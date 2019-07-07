@@ -538,7 +538,7 @@ function getSqlAdvSelectQuery($table_name, $array, $orderby , $align, $status){
     foreach ($array as $key => $value){
         $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
         $values = " '".$value[1]."' ";
-        $result = $result.$columns.$value[0].$values;
+        $result = $result.$columns." ".$value[0]." ".$values;
     }
 
     if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
