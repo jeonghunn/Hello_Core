@@ -14,6 +14,13 @@ function ActLog($user_srl, $REMOTE_ADDR, $date, $log_category, $log){
 }
 
 
+function updateLastAccess($user_srl){
+    if($user_srl <= 0) return false;
+    DBQuery(getSqlUpdateQuery('pages', array('last_access'=> getTimeStamp()), array('srl' => $user_srl), true));
+}
+
+
+
 function ActLogSyncTask($user_srl, $REMOTE_ADDR, $date, $log_category, $log){
 	ThreadAct('ActLog', array($user_srl, $REMOTE_ADDR, $date, $log_category, $log));
 }

@@ -575,7 +575,7 @@ function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
         $result = $result.$columns.$deter.$values;
     }
 
-    if($status) $result = $result." AND `status` NOT LIKE 'deleted'";
+    if($status) $result = $result." AND `status` NOT LIKE 'deleted' AND `status` < 5";
 
 
     return $result;
