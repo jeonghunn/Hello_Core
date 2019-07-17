@@ -637,6 +637,16 @@ function arrayKeyToInfoArray($array){
     return $newArray;
 }
 
+function makeAdvInfoFromArray($array, $excludekey){
+
+    $newArray = array();
+    foreach ($array as $key => $value){
+        if(array_key_exists($key, $excludekey)) continue;
+        array_push($newArray,$key);
+    }
+    return $newArray;
+}
+
 function getIdentity(){
     global $user_identity;
     return $user_identity;
