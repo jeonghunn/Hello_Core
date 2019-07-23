@@ -524,7 +524,7 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
         $result = $result.$columns.$deter.$values;
     }
 
-    if($status) $result = $result." AND `status` NOT LIKE 'deleted' AND `status` < '5'";
+    if($status) $result = $result." ".($array != null ? "AND" : "")." `status` NOT LIKE 'deleted' AND `status` < '5'";
     if($orderby != null)$result = $result." ORDER BY ".$orderby." ".$align;
 
 
@@ -545,7 +545,7 @@ function getSqlAdvSelectQuery($table_name, $array, $orderby , $align, $status){
         $result = $result.$columns." ".$value[0]." ".$values;
     }
 
-    if($status) $result = $result." AND `status` NOT LIKE 'deleted' AND `status` < '5'";
+    if($status) $result = $result." ".($array != null ? "AND" : "")." `status` NOT LIKE 'deleted' AND `status` < '5'";
     if($orderby != null)$result = $result." ORDER BY ".$orderby." ".$align;
 
 
