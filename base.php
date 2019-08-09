@@ -591,9 +591,9 @@ function getSqlAdvUpdateQuery($table_name, $array, $whereArray, $status){
     $scolumns = "";
 
     foreach ($array as $key => $value){
-        $columns = $columns == '' ? ' `'.$key.'` ' : ', '.' `'.$key.'` ';
+        $scolumns = $scolumns == '' ? ' `'.$key.'` ' : ', '.' `'.$key.'` ';
         $values = " '".$value[1]."' ";
-        $result = $result.$columns." ".$value[0]." ".$values;
+        $result = $result.$scolumns." ".$value[0]." ".$values;
     }
 
     $result=$result." WHERE ";
