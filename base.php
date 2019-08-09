@@ -582,6 +582,35 @@ function getSqlUpdateQuery($table_name, $array, $whereArray, $status){
 
 }
 
+function getSqlAdvUpdateQuery($table_name, $array, $whereArray, $status){
+    $result = "UPDATE `".$table_name."` SET ";
+
+    $columns = "";
+    $deter = " LIKE ";
+
+    $scolumns = "";
+
+    foreach ($array as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : ', '.' `'.$key.'` ';
+        $values = " '".$value[1]."' ";
+        $result = $result.$columns." ".$value[0]." ".$values;
+    }
+
+    $result=$result." WHERE ";
+
+    foreach ($whereArray as $key => $value){
+        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $values = " '".$value."' ";
+        $result = $result.$columns.$deter.$values;
+    }
+
+    if($status) $result = $result." AND `status` NOT LIKE 'deleted' AND `status` < 5";
+
+
+    return $result;
+
+}
+
 function getSqlDeleteQuery($table_name, $array, $statusDelete){
     if($statusDelete) return getSqlUpdateQuery($table_name, array('status' => 'deleted'), $array, true);
 
