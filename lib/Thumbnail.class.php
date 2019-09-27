@@ -139,9 +139,11 @@ class Thumbnail
 		// 이미지 타입이 지원되지 않는 경우
 		// 1 = GIF, 2 = JPEG
 		$type = getimagesize($filepath);
-		if (($type[2] < 1 || $type[2] > 2) ||
+		if (($type[2] < 1 || $type[2] > 3) ||
 			($type[2] == 1 && ! function_exists('imagegif')) ||
-			($type[2] == 2 && ! function_exists('imagejpeg')))
+			($type[2] == 2 && ! function_exists('imagejpeg')) ||
+            ($type[2] == 3 && ! function_exists('imagepng'))
+        )
 		{
 			Thumbnail::raiseError('#Error: Thumbnail::create() : Filetype not supported. Thumbnail not created.'.' at '. __LINE__);
 		}
@@ -152,6 +154,7 @@ class Thumbnail
 		{
 			case 1: $image = imagecreatefromgif($filepath); break;
 			case 2: $image = imagecreatefromjpeg($filepath); break;
+            case 3: $image = imagecreatefrompng($filepath); break;
 		}
 
 		// AntiAlias
