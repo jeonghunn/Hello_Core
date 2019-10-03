@@ -286,32 +286,36 @@ function POST($value){
   return RealEscapeString($_POST[$value]);
 }
 
-function PostAct($url, $arrayvars){
+function PostAct($url, $arrayvars)
+{
+    $vars = null;
+
+    $arrayvars['ip_addr'] = getIPAddr();
 
 
+    foreach ($arrayvars as $key => $value) {
 
-for ($i=0 ; $i < count($arrayvars);$i++){
+        $vars = $vars . $key . "=" . $value . "&";
 
-$vars =+ $arrayvars[$i][0]."=".$arrayvars[$i][1];
-  if($i != count($arrayvars) - 1){
- $vars =+ "&";
-  }
- 
+
+    }
+
+    //Delete last char
+    substr($vars, 0, -1);
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_USERAGENT, getUserAgent());
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $response = curl_exec($ch);
+
+    return $response;
 }
 
-//$myvars = 'myvar1=' . $myvar1 . '&myvar2=' . $myvar2;
-
-$ch = curl_init( $url );
-curl_setopt( $ch, CURLOPT_POST, 1);
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $vars);
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt( $ch, CURLOPT_HEADER, 0);
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-
-$response = curl_exec( $ch );
-
-return $response;
-}
 
 function array_info_match($row, $info){
 
