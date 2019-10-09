@@ -9,6 +9,11 @@ $SERVER_URL = "s9uare.com/";
 $MAIN_URL = "http://s9uare.com/";
 $MAIN_API_URL = "http://s9uare.com/api.php";
 $CLIENT_SERVER_IP_ADDRESS = "52.78.110.116";
+$DEVELOPMENT_MODE = false;
+$EXTERNAL_REPORT = false;
+
+//ExternelAPI
+if($EXTERNAL_REPORT) require_once 'external_api.php';
 
 //Database
 require_once 'db_config.php';
