@@ -114,6 +114,10 @@ function amIAdmin(){
 
 function getAllowedStatus($user_srl, $user_status, $permission, $access_status, $access_user_srl, $access_user_status) {
 
+    if($user_srl == 0 || $access_user_srl == 0) {
+        return 5;
+    }
+
     //Obejct Deleted
     if($access_status == 5) {
         return 5;
