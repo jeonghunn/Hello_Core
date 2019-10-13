@@ -104,4 +104,44 @@ function APICheckAct($ip_point){
 
 }
 
+function isAdmin($permission){
+    return $permission < 3 && $permission > 0;
+}
+
+function amIAdmin(){
+    return $this -> isAdmin(getIdentity()['permission']);
+}
+
+function getAllowedStatus($user_srl, $user_status, $permission, $access_status, $access_user_srl, $access_user_status) {
+
+    //Obejct Deleted
+    if($access_status == 5) {
+        return 5;
+    }
+
+    //User deleted
+    if($user_status ==  5) {
+        return 5;
+    }
+
+    //Access User Deleted
+    if($access_user_status == 5) {
+        return 5;
+    }
+
+    if($user_srl === $access_user_srl) {
+        return 4;
+    }
+
+    if($permission <= 1) {
+        return 4;
+    }
+
+
+    return 0;
+
+}
+
+
+
 ?>
