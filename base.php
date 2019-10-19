@@ -303,6 +303,12 @@ function PostAct($url, $arrayvars)
     //Delete last char
     substr($vars, 0, -1);
 
+    $response = requestHttp($url, $vars);
+
+    return $response;
+}
+
+function requestHttp($url, $vars){
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
@@ -312,7 +318,6 @@ function PostAct($url, $arrayvars)
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
     $response = curl_exec($ch);
-
     return $response;
 }
 
