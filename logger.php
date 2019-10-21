@@ -7,7 +7,8 @@ function ActLog($user_srl, $REMOTE_ADDR, $date, $log_category, $log)
     global $EXTERNAL_REPORT;
 
     if($log_category == "error_report") {
-        $log = json_encode(array('trace' => REQUEST('error_trace'), 'user_agent' => getUserAgent()));
+        $log = json_encode(array('trace' => REQUEST('error_trace'), 'user_agent' => getUserAgent(),
+            'url' => REQUEST('url'), 'line' => REQUEST('line'), 'message' => REQUEST('message')));
         if($EXTERNAL_REPORT) External_Report($log);
     }
     DBQuery("INSERT DELAYED INTO `log` (`user_srl`, `ip_addr`, `date`, `category`, `value`) VALUES ('$user_srl', '$REMOTE_ADDR', '$date' , '$log_category', '$log');");
