@@ -308,6 +308,27 @@ function PostAct($url, $arrayvars)
     return $response;
 }
 
+function GetAct($url, $arrayvars)
+{
+    $vars = null;
+
+    $arrayvars['ip_addr'] = getIPAddr();
+
+    foreach ($arrayvars as $key => $value) {
+
+        $vars = $vars . $key . "=" . $value . "&";
+
+
+    }
+
+    //Delete last char
+    substr($vars, 0, -1);
+
+    $response = requestHttp($url . "?" . $vars, null);
+
+    return $response;
+}
+
 function requestHttp($url, $vars){
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
