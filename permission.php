@@ -108,10 +108,6 @@ function isAdmin($permission){
     return $permission < 3 && $permission > 0;
 }
 
-function amIAdmin(){
-    return $this -> isAdmin(getIdentity()['permission']);
-}
-
 function getAllowedStatus($user_srl, $user_status, $permission, $access_status, $access_user_srl, $access_user_status) {
 
     if($user_srl == 0 || $access_user_srl == 0) {
