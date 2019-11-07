@@ -2,8 +2,9 @@
 define('642979',   TRUE);
 
 require_once 'config.php';
- require_once 'core/base.php';
- require_once 'core/db.php';
+require_once 'core/base.php';
+require_once 'core/sql_query.php';
+require_once 'core/db.php';
 
 
 //debugMode();
