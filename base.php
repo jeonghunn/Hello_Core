@@ -540,8 +540,8 @@ function getSqlInsertQuery($table_name, $array){
     return $result;
 }
 
-function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
-    $result = "SELECT * FROM `".$table_name."` ";
+function getSqlSelectQuery($table_name, $array, $orderby , $align, $status, $additional_join = ""){
+    $result = "SELECT * FROM `".$table_name."` ".$additional_join;
     if($array != null) $result=$result." WHERE ";
 
     $columns = "";
@@ -562,8 +562,8 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status){
 
 }
 
-function getSqlAdvSelectQuery($table_name, $array, $orderby , $align, $status){
-    $result = "SELECT * FROM `".$table_name."` ";
+function getSqlAdvSelectQuery($table_name, $array, $orderby , $align, $status, $additional_join = ""){
+    $result = "SELECT * FROM `".$table_name."` ".$additional_join;
     if($array != null) $result=$result." WHERE ";
 
     $columns = "";
