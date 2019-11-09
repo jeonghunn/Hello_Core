@@ -24,12 +24,12 @@ function getSqlSelectQuery($table_name, $array, $orderby , $align, $status, $add
 
 
     foreach ($array as $key => $value){
-        $columns = $columns == '' ? ' `'.$key.'` ' : 'AND '.' `'.$key.'` ';
+        $columns = $columns == '' ? ' '.$table_name.'.'.$key.' ' : 'AND '.$table_name.'.'.$key;
         $values = " '".$value."' ";
         $result = $result.$columns.$deter.$values;
     }
 
-    if($status) $result = $result." ".($array != null ? "AND" : "WHERE")." `status` NOT LIKE 'deleted' AND `status` < '5'";
+    if($status) $result = $result." ".($array != null ? "AND" : "WHERE")." ".$table_name.".status NOT LIKE 'deleted' AND ".$table_name.".status < '5'";
     if($orderby != null)$result = $result." ORDER BY ".$orderby." ".$align;
 
 
