@@ -136,3 +136,7 @@ function getSqlDeleteQuery($table_name, $array, $statusDelete){
 
 }
 
+function getSqlInnerJoin($joinTable, $columnName, $joinColumnName ) {
+    return "INNER JOIN ".$joinTable." ON ".$columnName." = ".$joinTable.".".$joinColumnName;
+}
+
