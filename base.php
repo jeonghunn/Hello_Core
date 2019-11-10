@@ -443,6 +443,10 @@ function endsWith($haystack, $needle) {
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
+function contains($text, $str) {
+    return (strpos($text, $str) !== false);
+}
+
 
 function contentconvert($content)
 {
