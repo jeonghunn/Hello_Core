@@ -130,6 +130,11 @@ function getHttpLanguage(){
 }
 
 
+function getDeletedStatus(): Int {
+    return 5;
+}
+
+
 function ErrorMessage($msg) {
     MessagePrint("error", $msg, "Error has been encountered.");
 
