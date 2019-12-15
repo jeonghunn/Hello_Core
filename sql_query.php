@@ -117,7 +117,7 @@ function getSqlAdvUpdateQuery($table_name, $array, $whereArray, $status){
 }
 
 function getSqlDeleteQuery($table_name, $array, $statusDelete){
-    if($statusDelete) return getSqlUpdateQuery($table_name, array('status' => 'deleted'), $array, true);
+    if($statusDelete) return getSqlUpdateQuery($table_name, array('status' => 5), $array, true);
 
     $result = "DELETE FROM `".$table_name."` WHERE ";
 
