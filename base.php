@@ -293,58 +293,66 @@ function POST($value){
 
 function PostAct($url, $arrayvars)
 {
+    $arrayvars['ip_addr'] = getIPAddr();
+    $result = requestHttp($url, 'POST', $arrayvars);
+    return $result['response'];
+}
+
+function requestHttp($url, $method, $arrayvars, $isJson=false, $header=array())
+{
     $vars = null;
 
-    $arrayvars['ip_addr'] = getIPAddr();
-
+    $headers = [];
 
     foreach ($arrayvars as $key => $value) {
-
         $vars = $vars . $key . "=" . $value . "&";
-
-
     }
 
     //Delete last char
     substr($vars, 0, -1);
 
-    $response = requestHttp($url, $vars);
+    if($method == 'GET' && count($arrayvars) > 0) {
+        $url = $url.'?'.$vars;
+    }
 
-    return $response;
+    $ch = curl_init($url);
+
+    if($method == 'POST') {
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $isJson ? $arrayvars : $vars);
+    }
+
+    if($header == null && $isJson) {
+       $header =  array('Accept: application/json', 'Content-Type: application/json');
+    }
+
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($ch, CURLOPT_USERAGENT, getUserAgent());
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADERFUNCTION,
+        function($curl, $header) use (&$headers)
+        {
+            $len = strlen($header);
+            $header = explode(':', $header, 2);
+            if (count($header) < 2) // ignore invalid headers
+                return $len;
+
+            $headers[strtolower(trim($header[0]))][] = trim($header[1]);
+
+            return $len;
+        }
+    );
+
+    $response = curl_exec($ch);
+
+    return array('headers' => $headers, 'response' => $response);
 }
 
 function GetAct($url, $arrayvars)
 {
-    $vars = null;
-
-    $arrayvars['ip_addr'] = getIPAddr();
-
-    foreach ($arrayvars as $key => $value) {
-
-        $vars = $vars . $key . "=" . $value . "&";
-
-
-    }
-
-    //Delete last char
-    substr($vars, 0, -1);
-
-    $response = requestHttp($url . "?" . $vars, null);
-
-    return $response;
-}
-
-function requestHttp($url, $vars){
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_USERAGENT, getUserAgent());
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    $response = curl_exec($ch);
-    return $response;
+    $result = requestHttp($url, 'GET', $arrayvars);
+    return $result['response'];
 }
 
 
